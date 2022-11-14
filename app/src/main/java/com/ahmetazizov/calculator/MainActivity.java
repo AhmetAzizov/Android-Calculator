@@ -20,7 +20,21 @@ public class MainActivity extends AppCompatActivity {
         char sign = ' ';
         float digit;
         boolean newDigit = true;
+        boolean reset = false;
 
+
+        public void ButtonCalculation(int digit){
+            if (reset) {
+                number.delete(0, number.length());
+                result = 0.72398762345F;
+                reset = false;
+                newDigit = true;
+            }
+
+            TextView output = findViewById(R.id.txtMessageOutput);
+            number.append(String.valueOf(digit));
+            output.setText(number);
+        }
 
         public void calculation(){
             if (result == 0.72398762345F){
@@ -36,6 +50,14 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
+        public void buttonClear(View view){
+            TextView output = findViewById(R.id.txtMessageOutput);
+            output.setText("");
+            result = 0.72398762345F;
+            digit = 0;
+            number.delete(0, number.length());
+            newDigit = true;
+        }
 
         public void buttonResult(View view){
             TextView output = findViewById(R.id.txtMessageOutput);
@@ -44,22 +66,71 @@ public class MainActivity extends AppCompatActivity {
                 digit = Float.parseFloat(number.toString());
                 calculation();
 
+                digit = result;
+
                 if (result % 1 == 0) output.setText(String.valueOf((int)result));
                 else output.setText(String.valueOf(result));
 
                 result = 0.72398762345F;
+
+                newDigit = false;
+                reset = true;
             }
         }
 
         public void buttonAddition(View view){
             TextView output = findViewById(R.id.txtMessageOutput);
             if(number.length() > 0){
-                output.setText(" ");
-                digit = Float.parseFloat(number.toString());
+                output.setText("");
+                if (newDigit) digit = Float.parseFloat(number.toString());
                 calculation();
                 sign = '+';
                 output.setText("+");
                 number.delete(0, number.length());
+                newDigit = true;
+                reset = false;
+            }
+        }
+
+        public void buttonSubtraction(View view){
+            TextView output = findViewById(R.id.txtMessageOutput);
+            if(number.length() > 0){
+                output.setText("");
+                if (newDigit) digit = Float.parseFloat(number.toString());
+                calculation();
+                sign = '-';
+                output.setText("-");
+                number.delete(0, number.length());
+                newDigit = true;
+                reset = false;
+            }
+        }
+
+        public void buttonMultiplication(View view){
+            TextView output = findViewById(R.id.txtMessageOutput);
+            if(number.length() > 0){
+                output.setText("");
+                if (newDigit) digit = Float.parseFloat(number.toString());
+                calculation();
+                sign = '*';
+                output.setText("*");
+                number.delete(0, number.length());
+                newDigit = true;
+                reset = false;
+            }
+        }
+
+        public void buttonDivision(View view){
+            TextView output = findViewById(R.id.txtMessageOutput);
+            if(number.length() > 0){
+                output.setText("");
+                if (newDigit) digit = Float.parseFloat(number.toString());
+                calculation();
+                sign = '/';
+                output.setText("/");
+                number.delete(0, number.length());
+                newDigit = true;
+                reset = false;
             }
         }
 
@@ -85,77 +156,42 @@ public class MainActivity extends AppCompatActivity {
 
 
         public void button0(View view){
-            TextView output = findViewById(R.id.txtMessageOutput);
-
-            number.append("0");
-
-            output.setText(number);
+            ButtonCalculation(0);
         }
 
         public void button1(View view){
-            TextView output = findViewById(R.id.txtMessageOutput);
-
-            number.append("1");
-
-            output.setText(number);
+            ButtonCalculation(1);
         }
 
         public void button2(View view){
-            TextView output = findViewById(R.id.txtMessageOutput);
-
-            number.append("2");
-            output.setText(number.toString());
+            ButtonCalculation(2);
         }
 
         public void button3(View view){
-            TextView output = findViewById(R.id.txtMessageOutput);
-
-            number.append("3");
-            output.setText(number.toString());
+            ButtonCalculation(3);
         }
 
         public void button4(View view){
-            TextView output = findViewById(R.id.txtMessageOutput);
-
-            number.append("4");
-            output.setText(number.toString());
+            ButtonCalculation(4);
         }
 
         public void button5(View view){
-            TextView output = findViewById(R.id.txtMessageOutput);
-
-            number.append("5");
-            output.setText(number.toString());
+            ButtonCalculation(5);
         }
 
         public void button6(View view){
-            TextView output = findViewById(R.id.txtMessageOutput);
-
-            number.append("6");
-            output.setText(number.toString());
+            ButtonCalculation(6);
         }
 
         public void button7(View view){
-            TextView output = findViewById(R.id.txtMessageOutput);
-
-            number.append("7");
-            output.setText(number.toString());
+            ButtonCalculation(7);
         }
 
         public void button8(View view){
-            TextView output = findViewById(R.id.txtMessageOutput);
-
-            number.append("8");
-            output.setText(number.toString());
+            ButtonCalculation(8);
         }
 
         public void button9(View view){
-            TextView output = findViewById(R.id.txtMessageOutput);
-
-            number.append("9");
-            output.setText(number.toString());
+            ButtonCalculation(9);
         }
-
-
-
 }
