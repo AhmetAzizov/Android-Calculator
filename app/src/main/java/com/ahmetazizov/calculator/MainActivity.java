@@ -3,8 +3,10 @@ package com.ahmetazizov.calculator;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -21,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
         float digit;
         boolean newDigit = true;
         boolean reset = false;
+        boolean sqrt = false;
 
 
         public void ButtonCalculation(int digit){
@@ -73,6 +76,32 @@ public class MainActivity extends AppCompatActivity {
 
                 result = 0.72398762345F;
 
+                sqrt = true;
+                newDigit = false;
+                reset = true;
+            }
+        }
+
+        public void buttonPower(View view){
+            TextView output = findViewById(R.id.txtMessageOutput);
+            if (number.length() > 0){
+                output.setText("");
+
+                digit = Float.parseFloat(number.toString());
+
+                digit = digit * digit;
+
+                number.delete(0, number.length());
+                number.append(digit);
+
+                Toast.makeText(this, number, Toast.LENGTH_LONG).show();
+
+                if (digit % 1 == 0) output.setText(String.valueOf((int)digit));
+                else output.setText(String.valueOf(digit));
+
+                result = 0.72398762345F;
+
+                sqrt = true;
                 newDigit = false;
                 reset = true;
             }
@@ -89,6 +118,7 @@ public class MainActivity extends AppCompatActivity {
                 number.delete(0, number.length());
                 newDigit = true;
                 reset = false;
+                sqrt = false;
             }
         }
 
@@ -103,6 +133,7 @@ public class MainActivity extends AppCompatActivity {
                 number.delete(0, number.length());
                 newDigit = true;
                 reset = false;
+                sqrt = false;
             }
         }
 
