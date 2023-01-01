@@ -3,8 +3,10 @@ package com.ahmetazizov.calculator;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -21,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
         float digit;
         boolean newDigit = true;
         boolean reset = false;
+        boolean sqrt = false;
 
 
         public void ButtonCalculation(int digit){
@@ -66,13 +69,42 @@ public class MainActivity extends AppCompatActivity {
                 digit = Float.parseFloat(number.toString());
                 calculation();
 
-                digit = result;
+                number.delete(0, number.length());
+                number.append(result);
+
+                //digit = result;
 
                 if (result % 1 == 0) output.setText(String.valueOf((int)result));
                 else output.setText(String.valueOf(result));
 
-                result = 0.72398762345F;
+                //result = 0.72398762345F;
 
+                sqrt = true;
+                newDigit = false;
+                reset = true;
+            }
+        }
+
+        public void buttonPower(View view){
+            TextView output = findViewById(R.id.txtMessageOutput);
+            if (number.length() > 0){
+                output.setText("");
+
+                digit = Float.parseFloat(number.toString());
+
+                result = digit * digit;
+
+                number.delete(0, number.length());
+                number.append(result);
+
+                Toast.makeText(this, number, Toast.LENGTH_LONG).show();
+
+                if (result % 1 == 0) output.setText(String.valueOf((int)result));
+                else output.setText(String.valueOf(result));
+
+                //result = 0.72398762345F;
+
+                sqrt = true;
                 newDigit = false;
                 reset = true;
             }
@@ -82,13 +114,15 @@ public class MainActivity extends AppCompatActivity {
             TextView output = findViewById(R.id.txtMessageOutput);
             if(number.length() > 0){
                 output.setText("");
-                if (newDigit) digit = Float.parseFloat(number.toString());
+                if (!newDigit) result = 0.72398762345F;
+                digit = Float.parseFloat(number.toString());
                 calculation();
                 sign = '+';
                 output.setText("+");
                 number.delete(0, number.length());
                 newDigit = true;
                 reset = false;
+                sqrt = false;
             }
         }
 
@@ -96,13 +130,15 @@ public class MainActivity extends AppCompatActivity {
             TextView output = findViewById(R.id.txtMessageOutput);
             if(number.length() > 0){
                 output.setText("");
-                if (newDigit) digit = Float.parseFloat(number.toString());
+                if (!newDigit) result = 0.72398762345F;
+                digit = Float.parseFloat(number.toString());
                 calculation();
                 sign = '-';
                 output.setText("-");
                 number.delete(0, number.length());
                 newDigit = true;
                 reset = false;
+                sqrt = false;
             }
         }
 
@@ -110,7 +146,8 @@ public class MainActivity extends AppCompatActivity {
             TextView output = findViewById(R.id.txtMessageOutput);
             if(number.length() > 0){
                 output.setText("");
-                if (newDigit) digit = Float.parseFloat(number.toString());
+                if (!newDigit) result = 0.72398762345F;
+                digit = Float.parseFloat(number.toString());
                 calculation();
                 sign = '*';
                 output.setText("*");
@@ -124,7 +161,8 @@ public class MainActivity extends AppCompatActivity {
             TextView output = findViewById(R.id.txtMessageOutput);
             if(number.length() > 0){
                 output.setText("");
-                if (newDigit) digit = Float.parseFloat(number.toString());
+                if (newDigit) result = 0.72398762345F;
+                digit = Float.parseFloat(number.toString());
                 calculation();
                 sign = '/';
                 output.setText("/");
