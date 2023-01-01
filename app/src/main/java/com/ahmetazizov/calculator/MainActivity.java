@@ -69,12 +69,15 @@ public class MainActivity extends AppCompatActivity {
                 digit = Float.parseFloat(number.toString());
                 calculation();
 
-                digit = result;
+                number.delete(0, number.length());
+                number.append(result);
+
+                //digit = result;
 
                 if (result % 1 == 0) output.setText(String.valueOf((int)result));
                 else output.setText(String.valueOf(result));
 
-                result = 0.72398762345F;
+                //result = 0.72398762345F;
 
                 sqrt = true;
                 newDigit = false;
@@ -89,17 +92,17 @@ public class MainActivity extends AppCompatActivity {
 
                 digit = Float.parseFloat(number.toString());
 
-                digit = digit * digit;
+                result = digit * digit;
 
                 number.delete(0, number.length());
-                number.append(digit);
+                number.append(result);
 
                 Toast.makeText(this, number, Toast.LENGTH_LONG).show();
 
-                if (digit % 1 == 0) output.setText(String.valueOf((int)digit));
-                else output.setText(String.valueOf(digit));
+                if (result % 1 == 0) output.setText(String.valueOf((int)result));
+                else output.setText(String.valueOf(result));
 
-                result = 0.72398762345F;
+                //result = 0.72398762345F;
 
                 sqrt = true;
                 newDigit = false;
@@ -111,7 +114,8 @@ public class MainActivity extends AppCompatActivity {
             TextView output = findViewById(R.id.txtMessageOutput);
             if(number.length() > 0){
                 output.setText("");
-                if (newDigit) digit = Float.parseFloat(number.toString());
+                if (!newDigit) result = 0.72398762345F;
+                digit = Float.parseFloat(number.toString());
                 calculation();
                 sign = '+';
                 output.setText("+");
@@ -126,7 +130,8 @@ public class MainActivity extends AppCompatActivity {
             TextView output = findViewById(R.id.txtMessageOutput);
             if(number.length() > 0){
                 output.setText("");
-                if (newDigit) digit = Float.parseFloat(number.toString());
+                if (!newDigit) result = 0.72398762345F;
+                digit = Float.parseFloat(number.toString());
                 calculation();
                 sign = '-';
                 output.setText("-");
@@ -141,7 +146,8 @@ public class MainActivity extends AppCompatActivity {
             TextView output = findViewById(R.id.txtMessageOutput);
             if(number.length() > 0){
                 output.setText("");
-                if (newDigit) digit = Float.parseFloat(number.toString());
+                if (!newDigit) result = 0.72398762345F;
+                digit = Float.parseFloat(number.toString());
                 calculation();
                 sign = '*';
                 output.setText("*");
@@ -155,7 +161,8 @@ public class MainActivity extends AppCompatActivity {
             TextView output = findViewById(R.id.txtMessageOutput);
             if(number.length() > 0){
                 output.setText("");
-                if (newDigit) digit = Float.parseFloat(number.toString());
+                if (newDigit) result = 0.72398762345F;
+                digit = Float.parseFloat(number.toString());
                 calculation();
                 sign = '/';
                 output.setText("/");
