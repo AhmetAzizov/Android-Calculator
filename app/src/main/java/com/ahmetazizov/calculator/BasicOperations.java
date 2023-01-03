@@ -1,17 +1,23 @@
 package com.ahmetazizov.calculator;
 
-public class Subtraction extends Number{
-    Subtraction(){
+public class BasicOperations extends Number{
+    BasicOperations(char sign){
         if (isNull()){
             setResult(Float.parseFloat(getDisplayNumber()));
             setDigit(0);
         }else{
             setDigit(Float.parseFloat(getDisplayNumber()));
+
             float temporaryResult = getResult();
-            temporaryResult -= getDigit();
+
+            switch (sign){
+                case '+': temporaryResult += getDigit(); break;
+                case '-': temporaryResult -= getDigit(); break;
+                case '*': temporaryResult *= getDigit(); break;
+                case '/': temporaryResult /= getDigit(); break;
+            }
             setResult(temporaryResult);
         }
-
         if (!isIsResult()) setDisplayNumber("");
     }
 }

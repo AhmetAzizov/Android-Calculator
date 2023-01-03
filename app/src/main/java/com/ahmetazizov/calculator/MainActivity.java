@@ -17,34 +17,19 @@ public class MainActivity extends AppCompatActivity {
 
         public void buttonResult(View view){
         if (!Number.isNull() && Number.getDisplayNumber() != "") {
-                Number calculation = new Number(Number.getLastOperation());
+                Number.setIsResult(true);
+                BasicOperations calculation = new BasicOperations(Number.getLastOperation());
+
+//                Number.setResult(Float.parseFloat(String.valueOf(Number.getResult()).replaceFirst("\\.0+$", "")));
 
                 TextView output = findViewById(R.id.txtMessageOutput);
-                output.setText(String.valueOf(Number.getResult()));
+                output.setText(String.valueOf(Number.getResult()).replaceFirst("\\.0+$", ""));
             }
-        }
-
-        public void buttonSubtraction(){
-            if (!Number.isIsResult()) {
-                Subtraction subtraction = new Subtraction();
-            }
-            Number.setIsResult(false);
-            Number.setDisplayNumber("");
-
-            String temporaryDisplayNumber = Number.getDisplayNumber();
-            temporaryDisplayNumber += "-";
-
-            Number.setDisplayNumber(temporaryDisplayNumber);
-            Number.setLastOperation('-');
-
-            TextView output = findViewById(R.id.txtMessageOutput);
-            output.setText(Number.getDisplayNumber());
-            Number.setDisplayNumber("");
         }
 
         public void buttonAddition(View view){
             if (!Number.isIsResult()) {
-                Addition addition = new Addition();
+                BasicOperations calculation = new BasicOperations(Number.getLastOperation());
             }
             Number.setIsResult(false);
             Number.setDisplayNumber("");
@@ -60,20 +45,93 @@ public class MainActivity extends AppCompatActivity {
             Number.setDisplayNumber("");
         }
 
+        public void buttonSubtraction(View view){
+            if (!Number.isIsResult()) {
+                BasicOperations calculation = new BasicOperations(Number.getLastOperation());
+            }
+            Number.setIsResult(false);
+            Number.setDisplayNumber("");
+
+            String temporaryDisplayNumber = Number.getDisplayNumber();
+            temporaryDisplayNumber += "-";
+
+            Number.setDisplayNumber(temporaryDisplayNumber);
+            Number.setLastOperation('-');
+
+            TextView output = findViewById(R.id.txtMessageOutput);
+            output.setText(Number.getDisplayNumber());
+            Number.setDisplayNumber("");
+        }
+
+        public void buttonMultiplication(View view){
+            if (!Number.isIsResult()) {
+                BasicOperations calculation = new BasicOperations(Number.getLastOperation());
+            }
+            Number.setIsResult(false);
+            Number.setDisplayNumber("");
+
+            String temporaryDisplayNumber = Number.getDisplayNumber();
+            temporaryDisplayNumber += "*";
+
+            Number.setDisplayNumber(temporaryDisplayNumber);
+            Number.setLastOperation('*');
+
+            TextView output = findViewById(R.id.txtMessageOutput);
+            output.setText(Number.getDisplayNumber());
+            Number.setDisplayNumber("");
+        }
+
+        public void buttonDivision(View view){
+            if (!Number.isIsResult()) {
+                BasicOperations calculation = new BasicOperations(Number.getLastOperation());
+            }
+            Number.setIsResult(false);
+            Number.setDisplayNumber("");
+
+            String temporaryDisplayNumber = Number.getDisplayNumber();
+            temporaryDisplayNumber += "/";
+
+            Number.setDisplayNumber(temporaryDisplayNumber);
+            Number.setLastOperation('/');
+
+            TextView output = findViewById(R.id.txtMessageOutput);
+            output.setText(Number.getDisplayNumber());
+            Number.setDisplayNumber("");
+        }
+
         public void buttonFunction(int digit){
             if (Number.isIsResult()) {
                 Number.setDisplayNumber("");
                 Number.setIsResult(false);
-                Number.setDigit(756646324);
+                Number.setDigit(756646324.789F);
             }
 
             String temporaryDisplayNumber = Number.getDisplayNumber();
             temporaryDisplayNumber += String.format("%d", digit);
-
             Number.setDisplayNumber(temporaryDisplayNumber);
 
             TextView output = findViewById(R.id.txtMessageOutput);
             output.setText(Number.getDisplayNumber());
+        }
+
+        public void buttonDot(View view){
+         if (Number.isIsResult()) {
+                Number.setDisplayNumber("");
+                Number.setIsResult(false);
+                Number.setDigit(756646324.789F);
+            }
+
+            if (!Number.getDisplayNumber().contains(".")) {
+                String temporaryDisplayNumber = Number.getDisplayNumber();
+
+                if (Number.getDisplayNumber() == "") temporaryDisplayNumber += "0";
+
+                temporaryDisplayNumber += ".";
+                Number.setDisplayNumber(temporaryDisplayNumber);
+
+                TextView output = findViewById(R.id.txtMessageOutput);
+                output.setText(Number.getDisplayNumber());
+              }
         }
 
         public void button0(View view){

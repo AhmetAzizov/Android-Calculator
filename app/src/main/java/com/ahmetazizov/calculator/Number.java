@@ -1,7 +1,7 @@
  package com.ahmetazizov.calculator;
 
 public class Number {
-    private static float digit = 756646324;
+    private static float digit = 756646324.789F;
     private static String displayNumber = "";
     private static char lastOperation = ' ';
     private static float result;
@@ -9,17 +9,8 @@ public class Number {
 
     Number(){}
 
-    Number(char sign){
-        isResult = true;
-
-        switch (sign){
-            case '+': Addition addition = new Addition();
-            case '-': Subtraction subtraction = new Subtraction();
-        }
-    }
-
     public static boolean isNull(){
-        if(digit == 756646324){
+        if(digit == 756646324.789F){
             return true;
         }else{
             return false;
