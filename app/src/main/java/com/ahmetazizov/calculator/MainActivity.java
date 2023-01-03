@@ -1,12 +1,10 @@
 package com.ahmetazizov.calculator;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -17,219 +15,162 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-        StringBuffer number = new StringBuffer("");
-        float result = 0.72398762345F;
-        char sign = ' ';
-        float digit;
-        boolean newDigit = true;
-        boolean reset = false;
-        boolean sqrt = false;
-
-
-        public void ButtonCalculation(int digit){
-            if (reset) {
-                number.delete(0, number.length());
-                result = 0.72398762345F;
-                reset = false;
-                newDigit = true;
-            }
-
-            TextView output = findViewById(R.id.txtMessageOutput);
-            number.append(String.valueOf(digit));
-            output.setText(number);
-        }
-
-        public void calculation(){
-            if (result == 0.72398762345F){
-                result = digit;
-            }
-            else{
-                switch (sign){
-                    case '+': result += digit; break;
-                    case '-': result -= digit; break;
-                    case '*': result *= digit; break;
-                    case '/': result /= digit; break;
-                }
-            }
-        }
-
-        public void buttonClear(View view){
-            TextView output = findViewById(R.id.txtMessageOutput);
-            output.setText("");
-            result = 0.72398762345F;
-            digit = 0;
-            number.delete(0, number.length());
-            newDigit = true;
-        }
-
         public void buttonResult(View view){
-            TextView output = findViewById(R.id.txtMessageOutput);
-            if (number.length() > 0){
-                output.setText("");
-                digit = Float.parseFloat(number.toString());
-                calculation();
+        if (!Number.isNull() && Number.getDisplayNumber() != "") {
+                Number.setIsResult(true);
+                BasicOperations calculation = new BasicOperations(Number.getLastOperation());
 
-                number.delete(0, number.length());
-                number.append(result);
+//                Number.setResult(Float.parseFloat(String.valueOf(Number.getResult()).replaceFirst("\\.0+$", "")));
 
-                //digit = result;
-
-                if (result % 1 == 0) output.setText(String.valueOf((int)result));
-                else output.setText(String.valueOf(result));
-
-                //result = 0.72398762345F;
-
-                sqrt = true;
-                newDigit = false;
-                reset = true;
-            }
-        }
-
-        public void buttonPower(View view){
-            TextView output = findViewById(R.id.txtMessageOutput);
-            if (number.length() > 0){
-                output.setText("");
-
-                digit = Float.parseFloat(number.toString());
-
-                result = digit * digit;
-
-                number.delete(0, number.length());
-                number.append(result);
-
-                Toast.makeText(this, number, Toast.LENGTH_LONG).show();
-
-                if (result % 1 == 0) output.setText(String.valueOf((int)result));
-                else output.setText(String.valueOf(result));
-
-                //result = 0.72398762345F;
-
-                sqrt = true;
-                newDigit = false;
-                reset = true;
+                TextView output = findViewById(R.id.txtMessageOutput);
+                output.setText(String.valueOf(Number.getResult()).replaceFirst("\\.0+$", ""));
             }
         }
 
         public void buttonAddition(View view){
-            TextView output = findViewById(R.id.txtMessageOutput);
-            if(number.length() > 0){
-                output.setText("");
-                if (!newDigit) result = 0.72398762345F;
-                digit = Float.parseFloat(number.toString());
-                calculation();
-                sign = '+';
-                output.setText("+");
-                number.delete(0, number.length());
-                newDigit = true;
-                reset = false;
-                sqrt = false;
+            if (!Number.isIsResult()) {
+                BasicOperations calculation = new BasicOperations(Number.getLastOperation());
             }
+            Number.setIsResult(false);
+            Number.setDisplayNumber("");
+
+            String temporaryDisplayNumber = Number.getDisplayNumber();
+            temporaryDisplayNumber += "+";
+
+            Number.setDisplayNumber(temporaryDisplayNumber);
+            Number.setLastOperation('+');
+
+            TextView output = findViewById(R.id.txtMessageOutput);
+            output.setText(Number.getDisplayNumber());
+            Number.setDisplayNumber("");
         }
 
         public void buttonSubtraction(View view){
-            TextView output = findViewById(R.id.txtMessageOutput);
-            if(number.length() > 0){
-                output.setText("");
-                if (!newDigit) result = 0.72398762345F;
-                digit = Float.parseFloat(number.toString());
-                calculation();
-                sign = '-';
-                output.setText("-");
-                number.delete(0, number.length());
-                newDigit = true;
-                reset = false;
-                sqrt = false;
+            if (!Number.isIsResult()) {
+                BasicOperations calculation = new BasicOperations(Number.getLastOperation());
             }
+            Number.setIsResult(false);
+            Number.setDisplayNumber("");
+
+            String temporaryDisplayNumber = Number.getDisplayNumber();
+            temporaryDisplayNumber += "-";
+
+            Number.setDisplayNumber(temporaryDisplayNumber);
+            Number.setLastOperation('-');
+
+            TextView output = findViewById(R.id.txtMessageOutput);
+            output.setText(Number.getDisplayNumber());
+            Number.setDisplayNumber("");
         }
 
         public void buttonMultiplication(View view){
-            TextView output = findViewById(R.id.txtMessageOutput);
-            if(number.length() > 0){
-                output.setText("");
-                if (!newDigit) result = 0.72398762345F;
-                digit = Float.parseFloat(number.toString());
-                calculation();
-                sign = '*';
-                output.setText("*");
-                number.delete(0, number.length());
-                newDigit = true;
-                reset = false;
+            if (!Number.isIsResult()) {
+                BasicOperations calculation = new BasicOperations(Number.getLastOperation());
             }
+            Number.setIsResult(false);
+            Number.setDisplayNumber("");
+
+            String temporaryDisplayNumber = Number.getDisplayNumber();
+            temporaryDisplayNumber += "*";
+
+            Number.setDisplayNumber(temporaryDisplayNumber);
+            Number.setLastOperation('*');
+
+            TextView output = findViewById(R.id.txtMessageOutput);
+            output.setText(Number.getDisplayNumber());
+            Number.setDisplayNumber("");
         }
 
         public void buttonDivision(View view){
-            TextView output = findViewById(R.id.txtMessageOutput);
-            if(number.length() > 0){
-                output.setText("");
-                if (newDigit) result = 0.72398762345F;
-                digit = Float.parseFloat(number.toString());
-                calculation();
-                sign = '/';
-                output.setText("/");
-                number.delete(0, number.length());
-                newDigit = true;
-                reset = false;
+            if (!Number.isIsResult()) {
+                BasicOperations calculation = new BasicOperations(Number.getLastOperation());
             }
+            Number.setIsResult(false);
+            Number.setDisplayNumber("");
+
+            String temporaryDisplayNumber = Number.getDisplayNumber();
+            temporaryDisplayNumber += "/";
+
+            Number.setDisplayNumber(temporaryDisplayNumber);
+            Number.setLastOperation('/');
+
+            TextView output = findViewById(R.id.txtMessageOutput);
+            output.setText(Number.getDisplayNumber());
+            Number.setDisplayNumber("");
+        }
+
+        public void buttonFunction(int digit){
+            if (Number.isIsResult()) {
+                Number.setDisplayNumber("");
+                Number.setIsResult(false);
+                Number.setDigit(756646324.789F);
+            }
+
+            String temporaryDisplayNumber = Number.getDisplayNumber();
+            temporaryDisplayNumber += String.format("%d", digit);
+            Number.setDisplayNumber(temporaryDisplayNumber);
+
+            TextView output = findViewById(R.id.txtMessageOutput);
+            output.setText(Number.getDisplayNumber());
         }
 
         public void buttonDot(View view){
-            TextView output = findViewById(R.id.txtMessageOutput);
-            number.append(".");
-            digit = Float.parseFloat(number.toString());
-            output.setText(number);
+         if (Number.isIsResult()) {
+                Number.setDisplayNumber("");
+                Number.setIsResult(false);
+                Number.setDigit(756646324.789F);
+            }
+
+            if (!Number.getDisplayNumber().contains(".")) {
+                String temporaryDisplayNumber = Number.getDisplayNumber();
+
+                if (Number.getDisplayNumber() == "") temporaryDisplayNumber += "0";
+
+                temporaryDisplayNumber += ".";
+                Number.setDisplayNumber(temporaryDisplayNumber);
+
+                TextView output = findViewById(R.id.txtMessageOutput);
+                output.setText(Number.getDisplayNumber());
+              }
         }
-
-        public void buttonPositiveNegative(View view){
-            TextView output = findViewById(R.id.txtMessageOutput);
-
-            digit = Float.parseFloat(number.toString()) * -1;
-
-            number.delete(0, number.length());
-
-            if (digit % 1 == 0) number.append((int)digit);
-            else number.append(digit);
-
-            output.setText(number);
-        }
-
 
         public void button0(View view){
-            ButtonCalculation(0);
+            buttonFunction(0);
         }
 
         public void button1(View view){
-            ButtonCalculation(1);
+            buttonFunction(1);
         }
 
         public void button2(View view){
-            ButtonCalculation(2);
+            buttonFunction(2);
         }
 
         public void button3(View view){
-            ButtonCalculation(3);
+            buttonFunction(3);
         }
 
         public void button4(View view){
-            ButtonCalculation(4);
+            buttonFunction(4);
         }
 
         public void button5(View view){
-            ButtonCalculation(5);
+            buttonFunction(5);
         }
 
         public void button6(View view){
-            ButtonCalculation(6);
+            buttonFunction(6);
         }
 
         public void button7(View view){
-            ButtonCalculation(7);
+            buttonFunction(7);
         }
 
         public void button8(View view){
-            ButtonCalculation(8);
+            buttonFunction(8);
         }
 
         public void button9(View view){
-            ButtonCalculation(9);
+            buttonFunction(9);
         }
 }
