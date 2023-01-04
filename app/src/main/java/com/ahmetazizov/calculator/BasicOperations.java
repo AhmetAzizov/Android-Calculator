@@ -2,7 +2,7 @@ package com.ahmetazizov.calculator;
 
 public class BasicOperations extends Number{
     BasicOperations(char sign){
-        if (isNull()){
+        if (isDigitNull()){
             setResult(Float.parseFloat(getDisplayNumber()));
             setDigit(0);
         }else{
