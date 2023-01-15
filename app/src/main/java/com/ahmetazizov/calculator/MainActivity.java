@@ -3,6 +3,7 @@ package com.ahmetazizov.calculator;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -20,7 +21,6 @@ public class MainActivity extends AppCompatActivity {
             Number.setIsResult(true);
             Number.setIsOperation(false);
             BasicOperations calculation = new BasicOperations(Number.getLastOperation());
-
 
             TextView output = findViewById(R.id.txtMessageOutput);
             output.setText(String.valueOf(Number.getResult()).replaceFirst("\\.0+$", ""));
@@ -144,6 +144,34 @@ public class MainActivity extends AppCompatActivity {
 
             TextView output = findViewById(R.id.txtMessageOutput);
             output.setText(Number.getDisplayNumber());
+        }
+    }
+
+    public void buttonPositiveNegative(View view){
+        if (Number.isIsResult()){
+            String temporaryResult = String.valueOf(Number.getResult());
+
+            if (temporaryResult.contains("-")) {
+                temporaryResult = temporaryResult.substring(1, temporaryResult.length());
+            }else{
+                temporaryResult = '-' + temporaryResult;
+            }
+
+            Number.setResult(Float.parseFloat(temporaryResult));
+            TextView output = findViewById(R.id.txtMessageOutput);
+            output.setText(String.valueOf(Number.getResult()).replaceFirst("\\.0+$", ""));
+        } else{
+            String displayNumber = Number.getDisplayNumber();
+
+            if (displayNumber.contains("-")){
+                displayNumber = displayNumber.substring(1, displayNumber.length());
+            }else{
+                displayNumber = '-' + displayNumber;
+            }
+
+            Number.setDisplayNumber(displayNumber);
+            TextView output = findViewById(R.id.txtMessageOutput);
+            output.setText(String.valueOf(Number.getDisplayNumber()));
         }
     }
 

@@ -373,7 +373,7 @@
         android:onClick="buttonClear"
         android:text="AC"
         android:textColor="#F1DDDD"
-        android:textSize="20sp"
+        android:textSize="15sp"
         app:cornerRadius="30dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline17"
         app:layout_constraintEnd_toStartOf="@+id/guideline10"
